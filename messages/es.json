@@ -1,0 +1,199 @@
+{
+  "metadata": {
+    "title": "CalcosNQN - Calcos de Patagonia",
+    "description": "Tienda online de calcos y stickers de la Patagonia Argentina. Villa La Angostura, Bariloche, Las Grutas y mas."
+  },
+  "nav": {
+    "home": "Inicio",
+    "catalog": "Catalogo",
+    "cart": "Carrito",
+    "reseller": "Vende en tu Local",
+    "admin": "Admin"
+  },
+  "home": {
+    "hero": {
+      "title": "Calcos de la Patagonia",
+      "subtitle": "Stickers unicos con la mejor onda patagonica.",
+      "cta": "Ver catalogo",
+      "uvInk": "Tinta UV",
+      "waterproof": "Resistente al agua",
+      "scratchproof": "Resistente al roce",
+      "heatproof": "Resistente al calor",
+      "idealFor": "Ideal para el termo y el auto. Pegalas donde vos quieras."
+    },
+    "featured": {
+      "title": "Destacadas",
+      "viewAll": "Ver todas"
+    },
+    "categories": {
+      "title": "Categorias"
+    }
+  },
+  "catalog": {
+    "title": "Catalogo",
+    "search": "Buscar calcos...",
+    "filters": {
+      "all": "Todas",
+      "baseType": "Tipo de base",
+      "whiteBase": "Base Blanca",
+      "holographicBase": "Base Holografica",
+      "sortBy": "Ordenar por",
+      "newest": "Mas recientes",
+      "priceAsc": "Menor precio",
+      "priceDesc": "Mayor precio",
+      "nameAsc": "A-Z"
+    },
+    "noResults": "No se encontraron calcos con esos filtros.",
+    "clearFilters": "Limpiar filtros"
+  },
+  "sticker": {
+    "model": "Modelo",
+    "baseType": "Tipo de base",
+    "whiteBase": "Base Blanca",
+    "holographicBase": "Base Holografica",
+    "price": "Precio",
+    "stock": "Stock disponible",
+    "outOfStock": "Sin stock",
+    "addToCart": "Agregar al carrito",
+    "added": "Agregada al carrito",
+    "related": "Calcos relacionadas"
+  },
+  "cart": {
+    "title": "Tu Carrito",
+    "empty": "Tu carrito esta vacio",
+    "continueShopping": "Seguir comprando",
+    "quantity": "Cantidad",
+    "remove": "Eliminar",
+    "subtotal": "Subtotal",
+    "total": "Total",
+    "checkout": "Enviar pedido por WhatsApp",
+    "checkoutForm": {
+      "name": "Tu nombre",
+      "city": "Ciudad",
+      "namePlaceholder": "Ej: Juan Perez",
+      "cityPlaceholder": "Ej: Neuquen"
+    },
+    "cleared": "Carrito vaciado. Pedido enviado por WhatsApp."
+  },
+  "reseller": {
+    "title": "Vende en tu Local",
+    "subtitle": "Suma CalcosNQN a tu negocio",
+    "description": "Ofrece las calcos mas copadas de la Patagonia en tu local. Dos opciones para empezar.",
+    "portabanner": {
+      "title": "Portabanner",
+      "description": "Pack completo para maxima visibilidad",
+      "items": {
+        "banner": "Banner 1.90 x 90cm",
+        "stand": "Porta banner premium doble tension",
+        "folder": "Carpeta A4 con planillas de stock",
+        "whiteModels": "104 modelos base blanca",
+        "holoModels": "16 modelos holograficos"
+      }
+    },
+    "afiche": {
+      "title": "Afiche",
+      "description": "Opcion compacta ideal para espacios reducidos",
+      "items": {
+        "poster": "Afiche A4 papel grueso",
+        "samples": "Hasta 8 modelos de muestra",
+        "stock": "Stock de cada modelo (minimo 10 por modelo)"
+      }
+    },
+    "contact": {
+      "title": "Contactanos",
+      "name": "Nombre",
+      "business": "Nombre del negocio",
+      "city": "Ciudad",
+      "phone": "Telefono",
+      "message": "Mensaje",
+      "send": "Enviar por WhatsApp",
+      "namePlaceholder": "Tu nombre",
+      "businessPlaceholder": "Nombre de tu local",
+      "cityPlaceholder": "Ej: Neuquen",
+      "phonePlaceholder": "Ej: 299 400 0000",
+      "messagePlaceholder": "Contanos sobre tu negocio..."
+    }
+  },
+  "admin": {
+    "login": {
+      "title": "Admin Login",
+      "email": "Email",
+      "password": "Contrasena",
+      "submit": "Ingresar",
+      "error": "Credenciales invalidas"
+    },
+    "sidebar": {
+      "dashboard": "Dashboard",
+      "stickers": "Calcos",
+      "tags": "Etiquetas",
+      "stock": "Stock",
+      "logout": "Cerrar sesion",
+      "backToSite": "Volver al sitio"
+    },
+    "dashboard": {
+      "title": "Dashboard",
+      "totalStickers": "Total calcos",
+      "activeStickers": "Activas",
+      "draftStickers": "Borradores",
+      "lowStock": "Stock bajo",
+      "lowStockAlert": "calcos con stock menor a 5"
+
+    },
+    "stickers": {
+      "title": "Calcos",
+      "new": "Nueva calco",
+      "edit": "Editar calco",
+      "model": "Modelo",
+      "name": "Nombre",
+      "status": "Estado",
+      "price": "Precio",
+      "stock": "Stock",
+      "actions": "Acciones",
+      "save": "Guardar",
+      "cancel": "Cancelar",
+      "delete": "Eliminar",
+      "confirmDelete": "Seguro que queres eliminar esta calco?",
+      "active": "Activa",
+      "draft": "Borrador",
+      "archived": "Archivada",
+      "featured": "Destacada",
+      "image": "Imagen",
+      "uploadImage": "Subir imagen",
+      "dragOrClick": "Arrastra o hace click para subir",
+      "maxSize": "Maximo 5MB (JPG, PNG, WebP)"
+    },
+    "tags": {
+      "title": "Etiquetas",
+      "new": "Nueva etiqueta",
+      "name": "Nombre",
+      "save": "Guardar",
+      "cancel": "Cancelar",
+      "delete": "Eliminar",
+      "confirmDelete": "Estas seguro de eliminar esta etiqueta?"
+    },
+    "stock": {
+      "title": "Gestion de Stock",
+      "update": "Actualizar",
+      "saved": "Stock actualizado"
+    }
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "Ocurrio un error",
+    "retry": "Reintentar",
+    "back": "Volver",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "create": "Crear",
+    "search": "Buscar",
+    "noResults": "Sin resultados",
+    "language": "Idioma"
+  },
+  "footer": {
+    "rights": "Todos los derechos reservados",
+    "instagram": "Seguinos en Instagram",
+    "whatsapp": "Contactanos por WhatsApp"
+  }
+}

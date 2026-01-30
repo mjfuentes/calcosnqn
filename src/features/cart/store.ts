@@ -66,6 +66,7 @@ export const useCartStore = create<CartState>()(
     }),
     {
       name: 'calcosnqn-cart',
+      skipHydration: true,
     }
   )
 )

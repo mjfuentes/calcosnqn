@@ -1,6 +1,7 @@
 import { z } from 'zod/v4'
 
 export const baseTypeSchema = z.enum(['base_blanca', 'base_holografica'])
+export const productTypeSchema = z.enum(['calco', 'jarro', 'iman'])
 export const stickerStatusSchema = z.enum(['active', 'draft', 'archived'])
 
 export const createStickerSchema = z.object({
@@ -13,7 +14,8 @@ export const createStickerSchema = z.object({
   description_es: z.string().nullable().optional(),
   description_en: z.string().nullable().optional(),
   slug: z.string({ error: 'Slug is required' }).min(1, 'Slug is required'),
-  base_type: baseTypeSchema,
+  product_type: productTypeSchema.default('calco'),
+  base_type: baseTypeSchema.nullable().optional(),
   price_ars: z
     .number({ error: 'Price is required' })
     .positive('Price must be positive'),
@@ -54,6 +56,7 @@ export const imageUploadSchema = z.object({
 export const catalogFilterSchema = z.object({
   search: z.string().optional(),
   tag: z.string().optional(),
+  product_type: productTypeSchema.optional(),
   base_type: baseTypeSchema.optional(),
   sort: z.enum(['newest', 'price_asc', 'price_desc', 'name_asc']).optional(),
   page: z.coerce.number().int().positive().optional(),

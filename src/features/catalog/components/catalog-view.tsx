@@ -6,10 +6,11 @@ import { useTranslations } from 'next-intl'
 import { SearchInput } from './search-input'
 import { TagFilterBar } from './tag-filter-bar'
 import { BaseTypeToggle } from './base-type-toggle'
+import { ProductTypeTabs } from './product-type-tabs'
 import { SortSelect } from './sort-select'
 import { StickerGrid } from './sticker-grid'
 import { Button } from '@/shared/components/ui'
-import type { StickerWithTags, Tag, BaseType } from '@/features/stickers/types'
+import type { StickerWithTags, Tag, BaseType, ProductType } from '@/features/stickers/types'
 
 interface CatalogViewProps {
   stickers: StickerWithTags[]
@@ -31,6 +32,7 @@ export function CatalogView({
 
   const currentSearch = searchParams.get('search') ?? ''
   const currentTag = searchParams.get('tag') ?? undefined
+  const currentProductType = (searchParams.get('product_type') as ProductType) ?? undefined
   const currentBaseType = (searchParams.get('base_type') as BaseType) ?? undefined
   const currentSort =
     (searchParams.get('sort') as 'newest' | 'price_asc' | 'price_desc' | 'name_asc') ?? undefined
@@ -59,10 +61,15 @@ export function CatalogView({
     [searchParams, router, pathname]
   )
 
-  const hasFilters = currentSearch || currentTag || currentBaseType || currentSort
+  const hasFilters = currentSearch || currentTag || currentProductType || currentBaseType || currentSort
 
   return (
     <div className="space-y-6">
+      <ProductTypeTabs
+        value={currentProductType}
+        onChange={(value) => updateParams({ product_type: value, base_type: undefined })}
+      />
+
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex-1 max-w-sm">
           <SearchInput
@@ -71,10 +78,12 @@ export function CatalogView({
           />
         </div>
         <div className="flex flex-wrap items-center gap-3">
-          <BaseTypeToggle
-            value={currentBaseType}
-            onChange={(value) => updateParams({ base_type: value })}
-          />
+          {currentProductType === 'calco' && (
+            <BaseTypeToggle
+              value={currentBaseType}
+              onChange={(value) => updateParams({ base_type: value })}
+            />
+          )}
           <SortSelect
             value={currentSort}
             onChange={(value) => updateParams({ sort: value })}
@@ -91,7 +100,9 @@ export function CatalogView({
       {stickers.length > 0 ? (
         <>
           <p className="text-sm text-muted">
-            {total} {total === 1 ? 'calco' : 'calcos'}
+            {total} {total === 1
+              ? t('resultSingular')
+              : t('resultPlural')}
           </p>
           <StickerGrid stickers={stickers} />
           {hasMore && (

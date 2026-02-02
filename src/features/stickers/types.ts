@@ -7,6 +7,7 @@ export type {
   TagInsert,
   TagUpdate,
   BaseType,
+  ProductType,
   StickerStatus,
 } from '@/shared/lib/supabase/types'
 

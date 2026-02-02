@@ -8,6 +8,7 @@ import { Edit, Trash2 } from 'lucide-react'
 import toast from 'react-hot-toast'
 import { Badge, Button, Dialog } from '@/shared/components/ui'
 import { formatPrice } from '@/shared/lib/utils'
+import { PRODUCT_TYPE_LABELS } from '@/shared/lib/constants'
 import { deleteSticker } from '@/features/stickers/actions'
 import type { StickerWithTags } from '@/features/stickers/types'
 
@@ -63,6 +64,7 @@ export function StickerTable({ stickers }: StickerTableProps) {
             <tr>
               <th className="px-4 py-3 font-medium">{t('model')}</th>
               <th className="px-4 py-3 font-medium">{t('name')}</th>
+              <th className="px-4 py-3 font-medium">{t('productType')}</th>
               <th className="px-4 py-3 font-medium">{t('status')}</th>
               <th className="px-4 py-3 font-medium">{t('price')}</th>
               <th className="px-4 py-3 font-medium">{t('stock')}</th>
@@ -79,6 +81,11 @@ export function StickerTable({ stickers }: StickerTableProps) {
                   {sticker.model_number}
                 </td>
                 <td className="px-4 py-3">{sticker.name_es}</td>
+                <td className="px-4 py-3">
+                  <Badge variant="default">
+                    {PRODUCT_TYPE_LABELS.es[sticker.product_type]}
+                  </Badge>
+                </td>
                 <td className="px-4 py-3">
                   <Badge variant={statusVariant[sticker.status]}>
                     {t(sticker.status)}

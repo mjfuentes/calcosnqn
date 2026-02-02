@@ -6,7 +6,6 @@ import { Link } from '@/features/i18n/navigation'
 import { ShoppingCart, Menu, X } from 'lucide-react'
 import { LanguageToggle } from './language-toggle'
 import { MobileMenu } from './mobile-menu'
-import { SITE_NAME } from '@/shared/lib/constants'
 
 interface HeaderProps {
   cartCount?: number
@@ -24,18 +23,21 @@ export function Header({ cartCount = 0 }: HeaderProps) {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-md">
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4">
-        <Link href="/" className="flex items-center gap-2">
-          <span className="text-xl font-bold text-accent font-mono">
-            {SITE_NAME}
-          </span>
+        <Link href="/" className="flex items-center">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/calcosnqn_header.png"
+            alt="CalcosNQN"
+            className="h-12 w-auto object-contain"
+          />
         </Link>
 
-        <div className="hidden items-center gap-6 md:flex">
+        <div className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-6 md:flex">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+              className="text-base font-medium text-muted-foreground transition-colors hover:text-foreground"
             >
               {link.label}
             </Link>

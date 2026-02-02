@@ -6,6 +6,7 @@ import { StickerGrid } from '@/features/catalog/components/sticker-grid'
 import { AddToCartButton } from '@/features/catalog/components/add-to-cart-button'
 import { Badge } from '@/shared/components/ui'
 import { formatPrice, getLocalizedName, getLocalizedDescription } from '@/shared/lib/utils'
+import { PRODUCT_TYPE_LABELS } from '@/shared/lib/constants'
 import type { Locale } from '@/features/i18n/config'
 
 interface StickerPageProps {
@@ -36,10 +37,12 @@ export default async function StickerDetailPage({ params }: StickerPageProps) {
   const typedLocale = locale as Locale
   const name = getLocalizedName(sticker, typedLocale)
   const description = getLocalizedDescription(sticker, typedLocale)
-  const baseLabel =
-    sticker.base_type === 'base_holografica'
+  const productTypeLabel = PRODUCT_TYPE_LABELS[typedLocale][sticker.product_type]
+  const baseLabel = sticker.base_type
+    ? sticker.base_type === 'base_holografica'
       ? t('holographicBase')
       : t('whiteBase')
+    : null
 
   const related = await getRelatedStickers(
     sticker.id,
@@ -79,13 +82,16 @@ export default async function StickerDetailPage({ params }: StickerPageProps) {
           </div>
 
           <div className="flex flex-wrap gap-2">
-            <Badge
-              variant={
-                sticker.base_type === 'base_holografica' ? 'accent' : 'default'
-              }
-            >
-              {baseLabel}
-            </Badge>
+            <Badge variant="default">{productTypeLabel}</Badge>
+            {baseLabel && (
+              <Badge
+                variant={
+                  sticker.base_type === 'base_holografica' ? 'accent' : 'default'
+                }
+              >
+                {baseLabel}
+              </Badge>
+            )}
             {sticker.tags.map((tag) => (
               <Badge key={tag.id} variant="outline">
                 {getLocalizedName(tag, typedLocale)}

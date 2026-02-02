@@ -27,11 +27,26 @@
     },
     "categories": {
       "title": "Categories"
+    },
+    "productTypes": {
+      "title": "Our Products",
+      "calco": "Stickers",
+      "calcoDesc": "Vinyl stickers resistant to water, sun and scratches",
+      "jarro": "Mugs",
+      "jarroDesc": "Mugs with unique Patagonian designs",
+      "iman": "Magnets",
+      "imanDesc": "Decorative fridge magnets"
     }
   },
   "catalog": {
     "title": "Catalog",
-    "search": "Search stickers...",
+    "search": "Search products...",
+    "productTypes": {
+      "all": "All",
+      "calco": "Stickers",
+      "jarro": "Mugs",
+      "iman": "Magnets"
+    },
     "filters": {
       "all": "All",
       "baseType": "Base type",
@@ -43,11 +58,14 @@
       "priceDesc": "Highest price",
       "nameAsc": "A-Z"
     },
-    "noResults": "No stickers found with those filters.",
+    "resultSingular": "product",
+    "resultPlural": "products",
+    "noResults": "No products found with those filters.",
     "clearFilters": "Clear filters"
   },
   "sticker": {
     "model": "Model",
+    "productType": "Product type",
     "baseType": "Base type",
     "whiteBase": "White Base",
     "holographicBase": "Holographic Base",
@@ -55,8 +73,9 @@
     "stock": "Available stock",
     "outOfStock": "Out of stock",
     "addToCart": "Add to cart",
+    "quickAdd": "Add",
     "added": "Added to cart",
-    "related": "Related stickers"
+    "related": "Related products"
   },
   "cart": {
     "title": "Your Cart",
@@ -124,7 +143,7 @@
     },
     "sidebar": {
       "dashboard": "Dashboard",
-      "stickers": "Stickers",
+      "stickers": "Products",
       "tags": "Tags",
       "stock": "Stock",
       "logout": "Log out",
@@ -132,18 +151,22 @@
     },
     "dashboard": {
       "title": "Dashboard",
-      "totalStickers": "Total stickers",
+      "totalStickers": "Total products",
       "activeStickers": "Active",
       "draftStickers": "Drafts",
       "lowStock": "Low stock",
-      "lowStockAlert": "stickers with stock below 5"
+      "lowStockAlert": "products with stock below 5"
     },
     "stickers": {
-      "title": "Stickers",
-      "new": "New sticker",
-      "edit": "Edit sticker",
+      "title": "Products",
+      "new": "New product",
+      "edit": "Edit product",
       "model": "Model",
       "name": "Name",
+      "productType": "Type",
+      "productTypeCalco": "Sticker",
+      "productTypeJarro": "Mug",
+      "productTypeIman": "Magnet",
       "status": "Status",
       "price": "Price",
       "stock": "Stock",
@@ -151,7 +174,7 @@
       "save": "Save",
       "cancel": "Cancel",
       "delete": "Delete",
-      "confirmDelete": "Are you sure you want to delete this sticker?",
+      "confirmDelete": "Are you sure you want to delete this product?",
       "active": "Active",
       "draft": "Draft",
       "archived": "Archived",
@@ -159,7 +182,11 @@
       "image": "Image",
       "uploadImage": "Upload image",
       "dragOrClick": "Drag or click to upload",
-      "maxSize": "Max 5MB (JPG, PNG, WebP)"
+      "maxSize": "Max 5MB (JPG, PNG, WebP)",
+      "productType": "Product type",
+      "calco": "Sticker",
+      "jarro": "Mug",
+      "iman": "Magnet"
     },
     "tags": {
       "title": "Tags",

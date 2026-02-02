@@ -1,6 +1,6 @@
 import type { CartItem } from './types'
 import type { Locale } from '@/features/i18n/config'
-import { WHATSAPP_PHONE, BASE_TYPE_LABELS } from '@/shared/lib/constants'
+import { WHATSAPP_PHONE, BASE_TYPE_LABELS, PRODUCT_TYPE_LABELS } from '@/shared/lib/constants'
 import { formatPrice, getLocalizedName } from '@/shared/lib/utils'
 
 interface CheckoutInfo {
@@ -19,12 +19,27 @@ export function buildWhatsAppMessage(
     ? 'Hola! Quiero hacer un pedido:'
     : 'Hi! I would like to place an order:'
 
-  const itemLines = items.map((item) => {
-    const name = getLocalizedName(item, locale)
-    const baseLabel = BASE_TYPE_LABELS[locale][item.base_type]
-    const subtotal = formatPrice(item.price_ars * item.quantity)
-    return `- ${item.model_number} ${name} (${baseLabel}) x${item.quantity} = ${subtotal}`
-  })
+  const productTypes = ['calco', 'jarro', 'iman'] as const
+  const groupedLines: string[] = []
+
+  for (const pt of productTypes) {
+    const group = items.filter((item) => item.product_type === pt)
+    if (group.length === 0) continue
+
+    const typeLabel = PRODUCT_TYPE_LABELS[locale][pt]
+    groupedLines.push(`*${typeLabel}:*`)
+
+    for (const item of group) {
+      const name = getLocalizedName(item, locale)
+      const baseLabel = item.base_type
+        ? ` (${BASE_TYPE_LABELS[locale][item.base_type]})`
+        : ''
+      const subtotal = formatPrice(item.price_ars * item.quantity)
+      groupedLines.push(`- ${item.model_number} ${name}${baseLabel} x${item.quantity} = ${subtotal}`)
+    }
+
+    groupedLines.push('')
+  }
 
   const total = items.reduce(
     (sum, item) => sum + item.price_ars * item.quantity,
@@ -34,7 +49,7 @@ export function buildWhatsAppMessage(
   const totalLabel = isEs ? 'Total' : 'Total'
   const totalLine = `*${totalLabel}: ${formatPrice(total)}*`
 
-  const parts = [header, '', ...itemLines, '', totalLine]
+  const parts = [header, '', ...groupedLines, totalLine]
 
   if (info?.name) {
     const label = isEs ? 'Nombre' : 'Name'

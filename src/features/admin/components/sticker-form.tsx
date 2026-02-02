@@ -8,7 +8,7 @@ import { Button, Input, Textarea, Select, Badge } from '@/shared/components/ui'
 import { ImageUploader } from './image-uploader'
 import { createSticker, updateSticker } from '@/features/stickers/actions'
 import { slugify } from '@/shared/lib/utils'
-import type { StickerWithTags, Tag, BaseType, StickerStatus } from '@/features/stickers/types'
+import type { StickerWithTags, Tag, BaseType, ProductType, StickerStatus } from '@/features/stickers/types'
 
 interface StickerFormProps {
   sticker?: StickerWithTags
@@ -27,7 +27,8 @@ export function StickerForm({ sticker, tags }: StickerFormProps) {
     description_es: sticker?.description_es ?? '',
     description_en: sticker?.description_en ?? '',
     slug: sticker?.slug ?? '',
-    base_type: (sticker?.base_type ?? 'base_blanca') as BaseType,
+    product_type: (sticker?.product_type ?? 'calco') as ProductType,
+    base_type: (sticker?.base_type ?? 'base_blanca') as BaseType | null,
     price_ars: sticker?.price_ars ? Number(sticker.price_ars) : 0,
     stock: sticker?.stock ?? 0,
     image_url: sticker?.image_url ?? '',
@@ -71,6 +72,7 @@ export function StickerForm({ sticker, tags }: StickerFormProps) {
         image_path: form.image_path || null,
         description_es: form.description_es || null,
         description_en: form.description_en || null,
+        base_type: form.product_type === 'calco' ? form.base_type : null,
       }
 
       const result = sticker
@@ -150,12 +152,13 @@ export function StickerForm({ sticker, tags }: StickerFormProps) {
 
       <div className="grid gap-4 sm:grid-cols-3">
         <Select
-          label="Base Type"
-          value={form.base_type}
-          onChange={(e) => updateField('base_type', e.target.value)}
+          label={t('productType')}
+          value={form.product_type}
+          onChange={(e) => updateField('product_type', e.target.value)}
           options={[
-            { value: 'base_blanca', label: 'Base Blanca' },
-            { value: 'base_holografica', label: 'Base Holografica' },
+            { value: 'calco', label: t('calco') },
+            { value: 'jarro', label: t('jarro') },
+            { value: 'iman', label: t('iman') },
           ]}
         />
         <Input
@@ -176,6 +179,18 @@ export function StickerForm({ sticker, tags }: StickerFormProps) {
           step="1"
         />
       </div>
+
+      {form.product_type === 'calco' && (
+        <Select
+          label="Base Type"
+          value={form.base_type ?? 'base_blanca'}
+          onChange={(e) => updateField('base_type', e.target.value)}
+          options={[
+            { value: 'base_blanca', label: 'Base Blanca' },
+            { value: 'base_holografica', label: 'Base Holografica' },
+          ]}
+        />
+      )}
 
       <div className="grid gap-4 sm:grid-cols-2">
         <Input

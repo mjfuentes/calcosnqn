@@ -1,10 +1,14 @@
 'use client'
 
+import { useState } from 'react'
 import Image from 'next/image'
 import { useLocale, useTranslations } from 'next-intl'
+import { ShoppingCart, Check } from 'lucide-react'
+import toast from 'react-hot-toast'
 import { Link } from '@/features/i18n/navigation'
 import { Badge } from '@/shared/components/ui'
 import { getLocalizedName, formatPrice } from '@/shared/lib/utils'
+import { useCartStore } from '@/features/cart/store'
 import type { StickerWithTags } from '@/features/stickers/types'
 import type { Locale } from '@/features/i18n/config'
 
@@ -15,12 +19,35 @@ interface StickerCardProps {
 export function StickerCard({ sticker }: StickerCardProps) {
   const locale = useLocale() as Locale
   const t = useTranslations('sticker')
+  const tCatalog = useTranslations('catalog.productTypes')
+  const addItem = useCartStore((state) => state.addItem)
+  const [added, setAdded] = useState(false)
 
   const name = getLocalizedName(sticker, locale)
-  const baseLabel =
-    sticker.base_type === 'base_holografica'
-      ? t('holographicBase')
-      : t('whiteBase')
+
+  function handleQuickAdd(e: React.MouseEvent) {
+    e.preventDefault()
+    e.stopPropagation()
+
+    addItem({
+      id: sticker.id,
+      model_number: sticker.model_number,
+      name_es: sticker.name_es,
+      name_en: sticker.name_en,
+      slug: sticker.slug,
+      product_type: sticker.product_type,
+      base_type: sticker.base_type,
+      price_ars: Number(sticker.price_ars),
+      image_url: sticker.image_url,
+      max_stock: sticker.stock,
+    })
+    setAdded(true)
+    toast.success(t('added'))
+    setTimeout(() => setAdded(false), 2000)
+  }
+
+  const showBaseTypeBadge =
+    sticker.product_type === 'calco' && sticker.base_type === 'base_holografica'
 
   return (
     <Link
@@ -50,14 +77,18 @@ export function StickerCard({ sticker }: StickerCardProps) {
           </div>
         )}
 
-        {sticker.base_type === 'base_holografica' && (
-          <Badge
-            variant="accent"
-            className="absolute left-2 top-2"
-          >
-            {baseLabel}
-          </Badge>
-        )}
+        <div className="absolute left-2 top-2 flex gap-1">
+          {sticker.product_type !== 'calco' && (
+            <Badge variant="default">
+              {tCatalog(sticker.product_type)}
+            </Badge>
+          )}
+          {showBaseTypeBadge && (
+            <Badge variant="accent">
+              {t('holographicBase')}
+            </Badge>
+          )}
+        </div>
       </div>
 
       <div className="p-3">
@@ -65,9 +96,24 @@ export function StickerCard({ sticker }: StickerCardProps) {
         <h3 className="mt-0.5 text-sm font-medium text-foreground truncate">
           {name}
         </h3>
-        <p className="mt-1 text-sm font-semibold text-accent">
-          {formatPrice(sticker.price_ars)}
-        </p>
+        <div className="mt-2 flex items-center justify-between">
+          <p className="text-sm font-semibold text-accent">
+            {formatPrice(sticker.price_ars)}
+          </p>
+          {sticker.stock > 0 && (
+            <button
+              onClick={handleQuickAdd}
+              className="flex items-center gap-1 rounded-md bg-accent px-2 py-1 text-xs font-medium text-black transition-colors hover:bg-accent-hover"
+            >
+              {added ? (
+                <Check className="h-3 w-3" />
+              ) : (
+                <ShoppingCart className="h-3 w-3" />
+              )}
+              {added ? t('added') : t('quickAdd')}
+            </button>
+          )}
+        </div>
       </div>
     </Link>
   )

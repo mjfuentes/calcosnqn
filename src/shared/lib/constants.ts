@@ -29,3 +29,16 @@ export const BASE_TYPE_LABELS = {
     base_holografica: 'Holographic Base',
   },
 } as const
+
+export const PRODUCT_TYPE_LABELS = {
+  es: {
+    calco: 'Calco',
+    jarro: 'Jarro',
+    iman: 'Iman',
+  },
+  en: {
+    calco: 'Sticker',
+    jarro: 'Mug',
+    iman: 'Magnet',
+  },
+} as const

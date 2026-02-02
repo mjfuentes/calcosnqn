@@ -3,8 +3,10 @@
 import Image from 'next/image'
 import { useLocale, useTranslations } from 'next-intl'
 import { Minus, Plus, Trash2 } from 'lucide-react'
+import { Badge } from '@/shared/components/ui'
 import { useCartStore } from '../store'
 import { getLocalizedName, formatPrice } from '@/shared/lib/utils'
+import { PRODUCT_TYPE_LABELS } from '@/shared/lib/constants'
 import type { CartItem } from '../types'
 import type { Locale } from '@/features/i18n/config'
 
@@ -42,7 +44,12 @@ export function CartItemRow({ item }: CartItemRowProps) {
 
       <div className="flex flex-1 flex-col justify-between">
         <div>
-          <p className="text-xs text-muted font-mono">{item.model_number}</p>
+          <div className="flex items-center gap-2">
+            <p className="text-xs text-muted font-mono">{item.model_number}</p>
+            <Badge variant="default" className="text-[10px] px-1.5 py-0">
+              {PRODUCT_TYPE_LABELS[locale][item.product_type]}
+            </Badge>
+          </div>
           <p className="text-sm font-medium text-foreground">{name}</p>
         </div>
 

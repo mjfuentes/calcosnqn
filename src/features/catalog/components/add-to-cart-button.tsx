@@ -33,6 +33,7 @@ export function AddToCartButton({ sticker, size = 'md' }: AddToCartButtonProps) 
       name_es: sticker.name_es,
       name_en: sticker.name_en,
       slug: sticker.slug,
+      product_type: sticker.product_type,
       base_type: sticker.base_type,
       price_ars: Number(sticker.price_ars),
       image_url: sticker.image_url,

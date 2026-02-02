@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Search, X } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useDebounce } from '@/shared/hooks/use-debounce'
@@ -14,10 +14,12 @@ export function SearchInput({ value, onChange }: SearchInputProps) {
   const t = useTranslations('catalog')
   const [localValue, setLocalValue] = useState(value)
   const debouncedValue = useDebounce(localValue, 300)
+  const onChangeRef = useRef(onChange)
+  onChangeRef.current = onChange
 
   useEffect(() => {
-    onChange(debouncedValue)
-  }, [debouncedValue, onChange])
+    onChangeRef.current(debouncedValue)
+  }, [debouncedValue])
 
   useEffect(() => {
     setLocalValue(value)

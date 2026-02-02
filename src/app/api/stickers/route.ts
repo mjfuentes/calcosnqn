@@ -10,6 +10,7 @@ export async function GET(request: NextRequest) {
     const filters = catalogFilterSchema.parse({
       search: searchParams.get('search') ?? undefined,
       tag: searchParams.get('tag') ?? undefined,
+      product_type: searchParams.get('product_type') ?? undefined,
       base_type: searchParams.get('base_type') ?? undefined,
       sort: searchParams.get('sort') ?? undefined,
       page: searchParams.get('page') ?? undefined,
@@ -21,6 +22,10 @@ export async function GET(request: NextRequest) {
       .from('stickers')
       .select('*', { count: 'exact' })
       .eq('status', 'active')
+
+    if (filters.product_type) {
+      query = query.eq('product_type', filters.product_type)
+    }
 
     if (filters.search) {
       query = query.or(

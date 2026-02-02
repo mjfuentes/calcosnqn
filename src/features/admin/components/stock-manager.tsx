@@ -6,7 +6,8 @@ import { useTranslations } from 'next-intl'
 import toast from 'react-hot-toast'
 import { Button, Badge } from '@/shared/components/ui'
 import { updateStock } from '@/features/stickers/actions'
-import type { StickerWithTags } from '@/features/stickers/types'
+import { PRODUCT_TYPE_LABELS } from '@/shared/lib/constants'
+import type { StickerWithTags, ProductType } from '@/features/stickers/types'
 
 interface StockManagerProps {
   stickers: StickerWithTags[]
@@ -55,67 +56,86 @@ export function StockManager({ stickers }: StockManagerProps) {
   if (stickers.length === 0) {
     return (
       <div className="rounded-lg border border-border bg-surface p-8 text-center text-muted-foreground">
-        No stickers yet
+        No products yet
       </div>
     )
   }
 
-  return (
-    <div className="space-y-4">
-      <div className="overflow-x-auto rounded-lg border border-border">
-        <table className="w-full text-sm">
-          <thead className="bg-surface text-left text-muted-foreground">
-            <tr>
-              <th className="px-4 py-3 font-medium">Model</th>
-              <th className="px-4 py-3 font-medium">Name</th>
-              <th className="px-4 py-3 font-medium">Status</th>
-              <th className="px-4 py-3 font-medium w-32">Stock</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-border">
-            {stickers.map((sticker) => {
-              const value = stockValues[sticker.id]
-              const changed = value !== sticker.stock
+  const grouped = stickers.reduce<Record<ProductType, StickerWithTags[]>>(
+    (acc, s) => ({
+      ...acc,
+      [s.product_type]: [...(acc[s.product_type] ?? []), s],
+    }),
+    { calco: [], jarro: [], iman: [] }
+  )
 
-              return (
-                <tr
-                  key={sticker.id}
-                  className="hover:bg-surface-hover transition-colors"
-                >
-                  <td className="px-4 py-3 font-mono text-accent">
-                    {sticker.model_number}
-                  </td>
-                  <td className="px-4 py-3">{sticker.name_es}</td>
-                  <td className="px-4 py-3">
-                    <Badge
-                      variant={
-                        sticker.status === 'active' ? 'success' : 'warning'
-                      }
-                    >
-                      {sticker.status}
-                    </Badge>
-                  </td>
-                  <td className="px-4 py-3">
-                    <input
-                      type="number"
-                      min="0"
-                      value={value}
-                      onChange={(e) =>
-                        updateValue(sticker.id, Number(e.target.value))
-                      }
-                      className={`w-20 rounded border px-2 py-1 text-sm bg-background ${
-                        changed
-                          ? 'border-accent text-accent font-medium'
-                          : 'border-border text-foreground'
-                      }`}
-                    />
-                  </td>
+  const productTypes = (['calco', 'jarro', 'iman'] as const).filter(
+    (type) => grouped[type].length > 0
+  )
+
+  return (
+    <div className="space-y-6">
+      {productTypes.map((type) => (
+        <div key={type} className="space-y-2">
+          <h2 className="text-lg font-semibold text-foreground">
+            {PRODUCT_TYPE_LABELS.es[type]}
+          </h2>
+          <div className="overflow-x-auto rounded-lg border border-border">
+            <table className="w-full text-sm">
+              <thead className="bg-surface text-left text-muted-foreground">
+                <tr>
+                  <th className="px-4 py-3 font-medium">Model</th>
+                  <th className="px-4 py-3 font-medium">Name</th>
+                  <th className="px-4 py-3 font-medium">Status</th>
+                  <th className="px-4 py-3 font-medium w-32">Stock</th>
                 </tr>
-              )
-            })}
-          </tbody>
-        </table>
-      </div>
+              </thead>
+              <tbody className="divide-y divide-border">
+                {grouped[type].map((sticker) => {
+                  const value = stockValues[sticker.id]
+                  const changed = value !== sticker.stock
+
+                  return (
+                    <tr
+                      key={sticker.id}
+                      className="hover:bg-surface-hover transition-colors"
+                    >
+                      <td className="px-4 py-3 font-mono text-accent">
+                        {sticker.model_number}
+                      </td>
+                      <td className="px-4 py-3">{sticker.name_es}</td>
+                      <td className="px-4 py-3">
+                        <Badge
+                          variant={
+                            sticker.status === 'active' ? 'success' : 'warning'
+                          }
+                        >
+                          {sticker.status}
+                        </Badge>
+                      </td>
+                      <td className="px-4 py-3">
+                        <input
+                          type="number"
+                          min="0"
+                          value={value}
+                          onChange={(e) =>
+                            updateValue(sticker.id, Number(e.target.value))
+                          }
+                          className={`w-20 rounded border px-2 py-1 text-sm bg-background ${
+                            changed
+                              ? 'border-accent text-accent font-medium'
+                              : 'border-border text-foreground'
+                          }`}
+                        />
+                      </td>
+                    </tr>
+                  )
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      ))}
 
       {hasChanges && (
         <div className="flex justify-end">

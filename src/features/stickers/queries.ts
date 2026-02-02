@@ -13,6 +13,10 @@ export async function getStickers(
     .select('*, sticker_tags(tag_id, tags(*))', { count: 'exact' })
     .eq('status', 'active')
 
+  if (filters.product_type) {
+    query = query.eq('product_type', filters.product_type)
+  }
+
   if (filters.search) {
     query = query.or(
       `name_es.ilike.%${filters.search}%,name_en.ilike.%${filters.search}%,model_number.ilike.%${filters.search}%`

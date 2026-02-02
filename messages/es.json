@@ -27,11 +27,26 @@
     },
     "categories": {
       "title": "Categorias"
+    },
+    "productTypes": {
+      "title": "Nuestros Productos",
+      "calco": "Calcos",
+      "calcoDesc": "Stickers de vinilo resistentes al agua, sol y roce",
+      "jarro": "Jarros",
+      "jarroDesc": "Jarros con disenos unicos de la Patagonia",
+      "iman": "Imanes",
+      "imanDesc": "Imanes decorativos para tu heladera"
     }
   },
   "catalog": {
     "title": "Catalogo",
-    "search": "Buscar calcos...",
+    "search": "Buscar productos...",
+    "productTypes": {
+      "all": "Todos",
+      "calco": "Calcos",
+      "jarro": "Jarros",
+      "iman": "Imanes"
+    },
     "filters": {
       "all": "Todas",
       "baseType": "Tipo de base",
@@ -43,11 +58,14 @@
       "priceDesc": "Mayor precio",
       "nameAsc": "A-Z"
     },
-    "noResults": "No se encontraron calcos con esos filtros.",
+    "resultSingular": "producto",
+    "resultPlural": "productos",
+    "noResults": "No se encontraron productos con esos filtros.",
     "clearFilters": "Limpiar filtros"
   },
   "sticker": {
     "model": "Modelo",
+    "productType": "Tipo de producto",
     "baseType": "Tipo de base",
     "whiteBase": "Base Blanca",
     "holographicBase": "Base Holografica",
@@ -55,8 +73,9 @@
     "stock": "Stock disponible",
     "outOfStock": "Sin stock",
     "addToCart": "Agregar al carrito",
-    "added": "Agregada al carrito",
-    "related": "Calcos relacionadas"
+    "quickAdd": "Agregar",
+    "added": "Agregado al carrito",
+    "related": "Productos relacionados"
   },
   "cart": {
     "title": "Tu Carrito",
@@ -124,7 +143,7 @@
     },
     "sidebar": {
       "dashboard": "Dashboard",
-      "stickers": "Calcos",
+      "stickers": "Productos",
       "tags": "Etiquetas",
       "stock": "Stock",
       "logout": "Cerrar sesion",
@@ -132,19 +151,22 @@
     },
     "dashboard": {
       "title": "Dashboard",
-      "totalStickers": "Total calcos",
-      "activeStickers": "Activas",
+      "totalStickers": "Total productos",
+      "activeStickers": "Activos",
       "draftStickers": "Borradores",
       "lowStock": "Stock bajo",
-      "lowStockAlert": "calcos con stock menor a 5"
-
+      "lowStockAlert": "productos con stock menor a 5"
     },
     "stickers": {
-      "title": "Calcos",
-      "new": "Nueva calco",
-      "edit": "Editar calco",
+      "title": "Productos",
+      "new": "Nuevo producto",
+      "edit": "Editar producto",
       "model": "Modelo",
       "name": "Nombre",
+      "productType": "Tipo",
+      "productTypeCalco": "Calco",
+      "productTypeJarro": "Jarro",
+      "productTypeIman": "Iman",
       "status": "Estado",
       "price": "Precio",
       "stock": "Stock",
@@ -152,15 +174,19 @@
       "save": "Guardar",
       "cancel": "Cancelar",
       "delete": "Eliminar",
-      "confirmDelete": "Seguro que queres eliminar esta calco?",
-      "active": "Activa",
+      "confirmDelete": "Seguro que queres eliminar este producto?",
+      "active": "Activo",
       "draft": "Borrador",
-      "archived": "Archivada",
-      "featured": "Destacada",
+      "archived": "Archivado",
+      "featured": "Destacado",
       "image": "Imagen",
       "uploadImage": "Subir imagen",
       "dragOrClick": "Arrastra o hace click para subir",
-      "maxSize": "Maximo 5MB (JPG, PNG, WebP)"
+      "maxSize": "Maximo 5MB (JPG, PNG, WebP)",
+      "productType": "Tipo de producto",
+      "calco": "Calco",
+      "jarro": "Jarro",
+      "iman": "Iman"
     },
     "tags": {
       "title": "Etiquetas",

@@ -1,4 +1,5 @@
 export type BaseType = 'base_blanca' | 'base_holografica'
+export type ProductType = 'calco' | 'jarro' | 'iman'
 export type StickerStatus = 'active' | 'draft' | 'archived'
 
 export interface Database {
@@ -13,7 +14,8 @@ export interface Database {
           description_es: string | null
           description_en: string | null
           slug: string
-          base_type: BaseType
+          base_type: BaseType | null
+          product_type: ProductType
           price_ars: number
           stock: number
           image_url: string | null
@@ -32,7 +34,8 @@ export interface Database {
           description_es?: string | null
           description_en?: string | null
           slug: string
-          base_type: BaseType
+          base_type?: BaseType | null
+          product_type?: ProductType
           price_ars: number
           stock?: number
           image_url?: string | null
@@ -51,7 +54,8 @@ export interface Database {
           description_es?: string | null
           description_en?: string | null
           slug?: string
-          base_type?: BaseType
+          base_type?: BaseType | null
+          product_type?: ProductType
           price_ars?: number
           stock?: number
           image_url?: string | null
@@ -135,6 +139,7 @@ export interface Database {
     }
     Enums: {
       base_type: BaseType
+      product_type: ProductType
       sticker_status: StickerStatus
     }
   }

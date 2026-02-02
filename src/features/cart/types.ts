@@ -1,4 +1,4 @@
-import type { BaseType } from '@/shared/lib/supabase/types'
+import type { BaseType, ProductType } from '@/shared/lib/supabase/types'
 
 export interface CartItem {
   id: string
@@ -6,7 +6,8 @@ export interface CartItem {
   name_es: string
   name_en: string
   slug: string
-  base_type: BaseType
+  product_type: ProductType
+  base_type: BaseType | null
   price_ars: number
   image_url: string | null
   quantity: number

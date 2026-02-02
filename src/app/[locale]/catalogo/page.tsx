@@ -50,6 +50,9 @@ async function CatalogContent({
   const filters: CatalogFilter = {
     search: typeof searchParams.search === 'string' ? searchParams.search : undefined,
     tag: typeof searchParams.tag === 'string' ? searchParams.tag : undefined,
+    product_type: ['calco', 'jarro', 'iman'].includes(searchParams.product_type as string)
+      ? (searchParams.product_type as CatalogFilter['product_type'])
+      : undefined,
     base_type: searchParams.base_type === 'base_blanca' || searchParams.base_type === 'base_holografica'
       ? searchParams.base_type
       : undefined,
